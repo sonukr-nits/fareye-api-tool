@@ -147,10 +147,6 @@ public class ApiService {
         }
     }
 
-    private boolean validatePayload(POSTRequestDTO requestDTO) {
-        return (requestDTO ==null || !StringUtils.hasText(requestDTO.getUrl()));
-    }
-
     public void commentCode(){
 //        String apikey="kHZvwc7VaqeNRfgMWufOCGCB5CAIgiVv";
 //        RestTemplate restTemplate = new RestTemplate();
