@@ -10,6 +10,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.List;
 
 @Service
@@ -128,11 +129,27 @@ public class ApiService {
      */
     public String handlePOSTRequest(POSTRequestDTO postRequestDTO){
 
-        return null;
+        if (postRequestDTO ==null || !StringUtils.hasText(postRequestDTO.getUrl())) {
+            throw new RuntimeException("Invalid Input");
+        }
+
+        URI uri = URI.create(String.format(postRequestDTO.getUrl(), postRequestDTO.getApiKey()));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(postRequestDTO.getRequestBody(), headers);
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+            return response.getBody();
+        } catch (Exception e) {
+            System.out.println("Post-Exception: " + uri);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
-
-
+    private boolean validatePayload(POSTRequestDTO requestDTO) {
+        return (requestDTO ==null || !StringUtils.hasText(requestDTO.getUrl()));
+    }
 
     public void commentCode(){
 //        String apikey="kHZvwc7VaqeNRfgMWufOCGCB5CAIgiVv";
