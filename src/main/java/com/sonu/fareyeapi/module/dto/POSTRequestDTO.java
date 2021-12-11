@@ -28,4 +28,13 @@ public class POSTRequestDTO {
     public void setRequestBody(String requestBody) {
         this.requestBody = requestBody;
     }
+
+    @Override
+    public String toString() {
+        return "POSTRequestDTO{" +
+                "url='" + url + '\'' +
+                ", apiKey='" + apiKey + '\'' +
+                ", requestBody='" + requestBody + '\'' +
+                '}';
+    }
 }

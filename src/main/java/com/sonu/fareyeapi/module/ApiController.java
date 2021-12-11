@@ -35,7 +35,7 @@ public class ApiController {
     @PostMapping("/post")
     public ResponseEntity<String> handlePostRequest(@RequestBody POSTRequestDTO postRequestDTO){
         try {
-            String responseString = "";
+            String responseString = apiService.handlePOSTRequest(postRequestDTO);
             return new ResponseEntity<>(responseString,HttpStatus.OK);
 
         }catch (Exception e){

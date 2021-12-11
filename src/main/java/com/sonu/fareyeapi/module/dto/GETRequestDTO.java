@@ -31,4 +31,13 @@ public class GETRequestDTO {
     public void setParams(String params) {
         this.params = params;
     }
+
+    @Override
+    public String toString() {
+        return "GETRequestDTO{" +
+                "url='" + url + '\'' +
+                ", apiKey='" + apiKey + '\'' +
+                ", params='" + params + '\'' +
+                '}';
+    }
 }
